@@ -1,10 +1,18 @@
 from util.config import config_logging
-from pathlib import Path
+from fastapi import FastAPI
 
-def main():
+app = FastAPI(title="BigBid", description="tbd", version="0.1")
+# app.include_router(xyz_routes, prefix="/xyz", tags["xyz"])
+# ...
+
+def main():   
     config_logging()
-    #config_path = Path(__file__).parent.parent / "src" / "util" / "logging.yaml"
-    #print(config_path)
+
+#TODO: healthcheack route
+@app.get("/health")
+async def health_check():
+    return {"status" : "healthy"}
+    
 
 if __name__ == "__main__":
     main()
